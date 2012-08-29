@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
+  <Identity Name="7165e1a2-ff66-4f80-9e01-f40b97cb935e" Publisher="CN=Tormod Fjeldskår" Version="1.0.0.0" />
+  <Properties>
+    <DisplayName>Cramit</DisplayName>
+    <PublisherDisplayName>Tormod Fjeldskår</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+  <Prerequisites>
+    <OSMinVersion>6.2.1</OSMinVersion>
+    <OSMaxVersionTested>6.2.1</OSMaxVersionTested>
+  </Prerequisites>
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+  <Applications>
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Cramit.App">
+      <VisualElements DisplayName="Cramit" Logo="Assets\Logo.png" SmallLogo="Assets\SmallLogo.png" Description="Cramit helps you cram." ForegroundText="light" BackgroundColor="#d24726">
+        <DefaultTile ShowName="allLogos" ShortName="Cramit" />
+        <SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#d24726" />
+        <InitialRotationPreference>
+          <Rotation Preference="landscape" />
+          <Rotation Preference="landscapeFlipped" />
+        </InitialRotationPreference>
+      </VisualElements>
+      <Extensions>
+        <Extension Category="windows.fileTypeAssociation">
+          <FileTypeAssociation Name="cramit">
+            <DisplayName>Cramit quiz definition</DisplayName>
+            <EditFlags OpenIsSafe="true" />
+            <SupportedFileTypes>
+              <FileType>.cramit</FileType>
+            </SupportedFileTypes>
+          </FileTypeAssociation>
+        </Extension>
+      </Extensions>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <Capability Name="documentsLibrary" />
+    <Capability Name="internetClient" />
+  </Capabilities>
+</Package>

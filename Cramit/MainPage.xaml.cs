@@ -30,8 +30,6 @@ namespace Cramit
         protected override void LoadState(Object navigationParameter, Dictionary<String, Object> pageState)
         {
             // TODO: Create an appropriate data model for your problem domain to replace the sample data
-            //var sampleDataGroups = SampleDataSource.GetGroups((String)navigationParameter);
-            //this.DefaultViewModel["Items"] = sampleDataGroups;
         }
 
         /// <summary>
@@ -42,17 +40,16 @@ namespace Cramit
         /// <param name="e">Event data that describes the item clicked.</param>
         void ItemView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var buttonId = ((ImageButtonModel)e.ClickedItem).ID;
+            var buttonId = ((MainPageButtonModel)e.ClickedItem).ID;
             switch (buttonId)
             {
                 case 1: // Quiz definitions
-                    // TODO
-                    // this.Frame.Navigate(typeof(QuizDefinitionsPage));
+                    Frame.Navigate(typeof(QuizDefinitionsPage));
                     break;
 
                 case 2: // Take quiz
                     // TODO
-                    // this.Frame.Navigate(typeof(TakeQuizPage));
+                    // Frame.Navigate(typeof(TakeQuizPage));
                     break;
             }
         }

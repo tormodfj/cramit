@@ -26,8 +26,6 @@
         <!-- Horizontal scrolling grid used in most view states -->
         <ListView
             x:Name="itemGridView"
-            AutomationProperties.AutomationId="ItemsGridView"
-            AutomationProperties.Name="Items"
             TabIndex="1"
             SelectionMode="None"
             IsSwipeEnabled="false"
@@ -56,8 +54,8 @@
         		</DataTemplate>
         	</ListView.ItemTemplate>
             <ListView.Items>
-                <data:ImageButtonModel Image="Assets/DefineQuizData.jpg" ID="1" Text="Quiz Definitions" />
-                <data:ImageButtonModel Image="Assets/TakeQuiz.jpg" ID="2" Text="Take Quiz" />
+                <data:MainPageButtonModel Image="Assets/DefineQuizData.jpg" ID="1" Text="Quiz Definitions" />
+                <data:MainPageButtonModel Image="Assets/TakeQuiz.jpg" ID="2" Text="Take Quiz" />
             </ListView.Items>
         </ListView>
 

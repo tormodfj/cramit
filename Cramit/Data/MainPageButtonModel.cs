@@ -7,7 +7,7 @@ using Windows.UI.Xaml.Media;
 
 namespace Cramit.Data
 {
-    public class ImageButtonModel
+    public class MainPageButtonModel
     {
         public int ID { get; set; }
 

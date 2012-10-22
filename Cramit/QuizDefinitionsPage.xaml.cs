@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Cramit.Data;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using Windows.Foundation;
@@ -13,8 +15,6 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Split Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234234
-
 namespace Cramit
 {
     /// <summary>
@@ -23,9 +23,33 @@ namespace Cramit
     /// </summary>
     public sealed partial class QuizDefinitionsPage : Cramit.Common.LayoutAwarePage
     {
+        // Using a DependencyProperty as the backing store for SelectedQuiz.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedQuizProperty =
+            DependencyProperty.Register("SelectedQuiz", typeof(Quiz), typeof(QuizDefinitionsPage), new PropertyMetadata(null));
+
+        private LocalQuizCollection quizCollection = new LocalQuizCollection();
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="QuizDefinitionsPage" /> class.
+        /// </summary>
         public QuizDefinitionsPage()
         {
             this.InitializeComponent();
+            DataContext = this;
+        }
+
+        /// <summary>
+        /// Gets the quizzes.
+        /// </summary>
+        public ObservableCollection<Quiz> Quizzes
+        {
+            get { return quizCollection.Items; }
+        }
+
+        public Quiz SelectedQuiz
+        {
+            get { return (Quiz)GetValue(SelectedQuizProperty); }
+            set { SetValue(SelectedQuizProperty, value); }
         }
 
         #region Page state management
@@ -41,26 +65,16 @@ namespace Cramit
         /// session.  This will be null the first time a page is visited.</param>
         protected override void LoadState(Object navigationParameter, Dictionary<String, Object> pageState)
         {
-            // TODO: Assign a bindable group to this.DefaultViewModel["Group"]
-            // TODO: Assign a collection of bindable items to this.DefaultViewModel["Items"]
-
             if (pageState == null)
             {
-                //// When this is a new page, select the first item automatically unless logical page
-                //// navigation is being used (see the logical page navigation #region below.)
-                //if (!this.UsingLogicalPageNavigation() && this.itemsViewSource.View != null)
-                //{
-                //    this.itemsViewSource.View.MoveCurrentToFirst();
-                //}
+                SelectedQuiz = quizCollection.Items.FirstOrDefault();
             }
             else
             {
-                //// Restore the previously saved state associated with this page
-                //if (pageState.ContainsKey("SelectedItem") && this.itemsViewSource.View != null)
-                //{
-                //    // TODO: Invoke this.itemsViewSource.View.MoveCurrentTo() with the selected
-                //    //       item as specified by the value of pageState["SelectedItem"]
-                //}
+                if (pageState.ContainsKey("SelectedQuiz"))
+                {
+                    SelectedQuiz = (Quiz)pageState["SelectedQuiz"];
+                }
             }
         }
 
@@ -72,12 +86,7 @@ namespace Cramit
         /// <param name="pageState">An empty dictionary to be populated with serializable state.</param>
         protected override void SaveState(Dictionary<String, Object> pageState)
         {
-            //if (this.itemsViewSource.View != null)
-            //{
-            //    var selectedItem = this.itemsViewSource.View.CurrentItem;
-            //    // TODO: Derive a serializable navigation parameter and assign it to
-            //    //       pageState["SelectedItem"]
-            //}
+            pageState["SelectedQuiz"] = SelectedQuiz;
         }
 
         #endregion
@@ -181,5 +190,17 @@ namespace Cramit
         }
 
         #endregion
+
+        private void HandleAddQuizClick(object sender, RoutedEventArgs e)
+        {
+            var newQuiz = CreateNewQuiz();
+            quizCollection.Items.Add(newQuiz);
+            SelectedQuiz = newQuiz;
+        }
+
+        private Quiz CreateNewQuiz()
+        {
+            return new Quiz { Title = @"(no name)", Description = @"(empty description)" };
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Cramit.Common;
 using System;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Threading.Tasks;
 using Windows.Storage;
 
@@ -22,9 +23,11 @@ namespace Cramit.Data
 
         private async void PopulateItems()
         {
-            var folder = await KnownFolders.DocumentsLibrary.GetFolderAsync(@"Cramit");
-            var files = await folder.GetFilesAsync();
-            
+            var quizFolder = await ApplicationData.Current.LocalFolder
+                .CreateFolderAsync("Indexed", CreationCollisionOption.OpenIfExists);
+
+            var files = await quizFolder.GetFilesAsync();
+
             Items.Clear();
             foreach (var file in files)
             {

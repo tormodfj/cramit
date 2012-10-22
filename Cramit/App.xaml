@@ -20,6 +20,42 @@
             <!-- Application-specific resources -->
 
             <x:String x:Key="AppName">Cramit</x:String>
+            
+            <Style x:Key="MainMenuItemTemplate" TargetType="ListView">
+                <Setter Property="SelectionMode" Value="None" />
+                <Setter Property="IsSwipeEnabled" Value="False" />
+                <Setter Property="IsItemClickEnabled" Value="True" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="ItemTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <Grid HorizontalAlignment="Left" Height="450" Width="300">
+                                <Border Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}">
+                                    <Image Source="{Binding Image}" Stretch="UniformToFill"/>
+                                </Border>
+                                <StackPanel Background="{StaticResource ListViewItemOverlayBackgroundThemeBrush}" VerticalAlignment="Bottom">
+                                    <TextBlock Foreground="{StaticResource ListViewItemOverlayForegroundThemeBrush}" FontSize="18.667" HorizontalAlignment="Center" Margin="15" Style="{StaticResource TitleTextStyle}" Text="{Binding Text}" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="ItemContainerStyle">
+                    <Setter.Value>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Margin" Value="50"/>
+                        </Style>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="ItemsPanel">
+                    <Setter.Value>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

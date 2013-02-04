@@ -9,6 +9,6 @@ namespace Cramit.Data
 
         public string Text { get; set; }
 
-        public string NavigateTo { get; set; }
+        public Type NavigateTo { get; set; }
     }
 }

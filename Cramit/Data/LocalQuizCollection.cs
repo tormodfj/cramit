@@ -1,4 +1,5 @@
-﻿using Cramit.Common;
+﻿using Caliburn.Micro;
+using Cramit.Common;
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -9,14 +10,14 @@ namespace Cramit.Data
 {
     public class LocalQuizCollection : BindableBase
     {
-        private ObservableCollection<Quiz> items = new ObservableCollection<Quiz>();
+        private BindableCollection<Quiz> items = new BindableCollection<Quiz>();
 
         public LocalQuizCollection()
         {
             PopulateItems();
         }
 
-        public ObservableCollection<Quiz> Items
+        public BindableCollection<Quiz> Items
         {
             get { return items; }
         }

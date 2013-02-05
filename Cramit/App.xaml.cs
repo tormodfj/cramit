@@ -1,14 +1,10 @@
-﻿using Caliburn.Micro;
-using Cramit.Common;
+﻿using System;
+using System.Collections.Generic;
+using Caliburn.Micro;
 using Cramit.ViewModels;
 using Cramit.Views;
-using System;
-using System.Collections.Generic;
-using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml.Controls;
-
-// The Split App template is documented at http://go.microsoft.com/fwlink/?LinkId=234228
 
 namespace Cramit
 {
@@ -20,8 +16,7 @@ namespace Cramit
         private WinRTContainer container;
 
         /// <summary>
-        /// Initializes the singleton Application object.  This is the first line of authored code
-        /// executed, and as such is the logical equivalent of main() or WinMain().
+        /// Initializes a new instance of the <see cref="App" /> class.
         /// </summary>
         public App()
         {
@@ -39,29 +34,55 @@ namespace Cramit
             DisplayRootView<MainPageView>();
         }
 
+        /// <summary>
+        /// Override to configure the framework and setup your IoC container.
+        /// </summary>
         protected override void Configure()
         {
             container = new WinRTContainer();
             container.RegisterWinRTServices();
             container.PerRequest<MainPageViewModel>();
-            container.PerRequest<QuizDefinitionsViewModel>();
+            container.PerRequest<DefineQuizViewModel>();
         }
 
+        /// <summary>
+        /// Override this to provide an IoC specific implementation.
+        /// </summary>
+        /// <param name="service">The service to locate.</param>
+        /// <param name="key">The key to locate.</param>
+        /// <returns>
+        /// The located service.
+        /// </returns>
         protected override object GetInstance(Type service, string key)
         {
             return container.GetInstance(service, key);
         }
 
+        /// <summary>
+        /// Override this to provide an IoC specific implementation
+        /// </summary>
+        /// <param name="service">The service to locate.</param>
+        /// <returns>
+        /// The located services.
+        /// </returns>
         protected override IEnumerable<object> GetAllInstances(Type service)
         {
             return container.GetAllInstances(service);
         }
 
+        /// <summary>
+        /// Override this to provide an IoC specific implementation.
+        /// </summary>
+        /// <param name="instance">The instance to perform injection on.</param>
         protected override void BuildUp(object instance)
         {
             container.BuildUp(instance);
         }
 
+        /// <summary>
+        /// Override this to register a navigation service.
+        /// </summary>
+        /// <param name="rootFrame">The root frame of the application.</param>
         protected override void PrepareViewFirst(Frame rootFrame)
         {
             container.RegisterNavigationService(rootFrame);

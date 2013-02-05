@@ -26,7 +26,7 @@
         </Grid>
 
         <!-- Horizontal ListView containing the menu -->
-        <ListView Grid.Row="2" x:Name="RootMenuItems" Style="{StaticResource MainMenuItemTemplate}"
-                  cal:Message.Attach="[Event ItemClick] = [MenuItemClicked($eventArgs)]"/>
+        <ListView Grid.Row="2" x:Name="MainMenuItems" Style="{StaticResource MainMenuItemTemplate}"
+                  cal:Message.Attach="[Event ItemClick] = [HandleMenuItemClicked($eventArgs)]"/>
     </Grid>
 </Page>

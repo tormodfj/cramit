@@ -15,7 +15,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Cramit.App">
-      <VisualElements DisplayName="Cramit" Logo="Assets\Logo.png" SmallLogo="Assets\SmallLogo.png" Description="Cramit helps you cram." ForegroundText="light" BackgroundColor="#d24726">
+      <VisualElements DisplayName="Cramit" Logo="Assets\Logo.png" SmallLogo="Assets\SmallLogo.png" Description="Cramit helps you cram." ForegroundText="light" BackgroundColor="#d24726" ToastCapable="false">
         <DefaultTile ShowName="allLogos" ShortName="Cramit" />
         <SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#d24726" />
         <InitialRotationPreference>
@@ -26,7 +26,7 @@
       <Extensions>
         <Extension Category="windows.fileTypeAssociation">
           <FileTypeAssociation Name="cramit">
-            <DisplayName>Cramit quiz definition</DisplayName>
+            <DisplayName>Cramit Quiz Definition</DisplayName>
             <EditFlags OpenIsSafe="true" />
             <SupportedFileTypes>
               <FileType>.cramit</FileType>

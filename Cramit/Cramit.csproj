@@ -105,10 +105,10 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data\LocalQuizCollection.cs" />
-    <Compile Include="Data\MainPageButtonModel.cs" />
+    <Compile Include="ViewModels\MainPageMenuItemViewModel.cs" />
     <Compile Include="Data\Quiz.cs" />
     <Compile Include="Data\QuizEntity.cs" />
-    <Compile Include="ViewModels\QuizDefinitionsViewModel.cs" />
+    <Compile Include="ViewModels\DefineQuizViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\BindableBase.cs" />
@@ -117,7 +117,7 @@
     <Compile Include="Common\LayoutAwarePage.cs" />
     <Compile Include="Common\RichTextColumns.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
-    <Compile Include="ViewModels\MainPage.cs" />
+    <Compile Include="ViewModels\MainPageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -128,7 +128,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\DefineQuizData.jpg" />
+    <Content Include="Assets\DefineQuiz.jpg" />
+    <Content Include="Assets\EditQuiz.jpg" />
     <Content Include="Assets\Logo.png" />
     <Content Include="Assets\Logo.scale-140.png" />
     <Content Include="Assets\Logo.scale-180.png" />
@@ -159,7 +160,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\QuizDefinitionsView.xaml">
+    <Page Include="Views\DefineQuizView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,29 +1,18 @@
-﻿using Cramit.Common;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 
 namespace Cramit.Data
 {
-    public class Quiz : BindableBase
+    public class Quiz
     {
-        private string title = string.Empty;
-        private string description = string.Empty;
-        private ObservableCollection<QuizEntity> items = new ObservableCollection<QuizEntity>();
-
-        public string Title
+        public Quiz()
         {
-            get { return title; }
-            set { SetProperty(ref title, value); }
+            Items = new ObservableCollection<QuizEntity>();
         }
 
-        public string Description
-        {
-            get { return description; }
-            set { SetProperty(ref description, value); }
-        }
+        public string Title { get; set; }
 
-        public ObservableCollection<QuizEntity> Items
-        {
-            get { return items; }
-        }
+        public string Description { get; set; }
+
+        public ObservableCollection<QuizEntity> Items { get; private set; }
     }
 }

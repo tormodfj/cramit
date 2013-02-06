@@ -55,6 +55,10 @@ namespace Cramit.ViewModels
                 messageDialog.CancelCommandIndex = 2;
                 await messageDialog.ShowAsync();
             }
+            else
+            {
+                base.GoBack();
+            }
         }
 
         private void Save()

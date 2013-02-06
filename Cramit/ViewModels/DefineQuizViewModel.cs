@@ -1,59 +1,48 @@
-﻿using Caliburn.Micro;
-using System;
+﻿using System;
 using System.Linq;
-using System.Threading.Tasks;
+using Caliburn.Micro;
+using Cramit.Data;
 using Windows.Storage;
 using Windows.Storage.Pickers;
-using Cramit.Data;
 using Windows.UI.Popups;
-using System.Threading;
 
 namespace Cramit.ViewModels
 {
+    /// <summary>
+    /// View model for defining a new quiz.
+    /// </summary>
     public class DefineQuizViewModel : ViewModelBase
     {
-        private readonly Quiz quiz;
+        private readonly EditQuizViewModel quizViewModel;
 
         private StorageFile quizFile;
-        private bool isDirty;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DefineQuizViewModel" /> class.
+        /// </summary>
+        /// <param name="navigationService">The navigation service.</param>
         public DefineQuizViewModel(INavigationService navigationService)
             : base(navigationService)
         {
-            quiz = new Quiz();
+            quizViewModel = new EditQuizViewModel();
         }
 
-        public string Title
+        /// <summary>
+        /// Gets the quiz.
+        /// </summary>
+        public EditQuizViewModel Quiz
         {
-            get
-            {
-                return quiz.Title;
-            }
-            set
-            {
-                quiz.Title = value;
-                isDirty = true;
-                NotifyOfPropertyChange(() => Title);
-            }
+            get { return quizViewModel; }
         }
 
-        protected override void OnInitialize()
+        /// <summary>
+        /// Navigates back.
+        /// </summary>
+        public override void GoBack()
         {
-            PickQuizSaveFile();
-            base.OnInitialize();
-        }
-
-        public override async void GoBack()
-        {
-            if (isDirty)
+            if (quizViewModel.IsDirty)
             {
-                var messageDialog = new MessageDialog("There are unsaved changes to your quiz. Do you wish to save?", "Save Quiz?");
-                messageDialog.Commands.Add(new UICommand("Save", _ => { Save(); base.GoBack(); }));
-                messageDialog.Commands.Add(new UICommand("Don't Save", _ => base.GoBack()));
-                messageDialog.Commands.Add(new UICommand("Cancel"));
-                messageDialog.DefaultCommandIndex = 0;
-                messageDialog.CancelCommandIndex = 2;
-                await messageDialog.ShowAsync();
+                GuardGoBack();
             }
             else
             {
@@ -61,12 +50,47 @@ namespace Cramit.ViewModels
             }
         }
 
-        private void Save()
+        /// <summary>
+        /// Saves the quiz.
+        /// </summary>
+        public async void Save()
         {
-            // TODO
+            string serialized = quizViewModel.Quiz.Serialize();
+            await quizFile.WriteAllTextAsync(serialized);
         }
 
-        private async Task PickQuizSaveFile()
+        /// <summary>
+        /// Called when initializing.
+        /// </summary>
+        protected override void OnInitialize()
+        {
+            PickQuizSaveFile();
+
+            base.OnInitialize();
+        }
+
+        /// <summary>
+        /// Asks the user of she really wants to go back when there are unsaved changes.
+        /// </summary>
+        private async void GuardGoBack()
+        {
+            var messageDialog = new MessageDialog(
+                title: "Save Quiz?",
+                content: "There are unsaved changes to your quiz. Do you wish to save?");
+
+            messageDialog.Commands.Add(new UICommand("Save", _ => { Save(); base.GoBack(); }));
+            messageDialog.Commands.Add(new UICommand("Don't Save", _ => base.GoBack()));
+            messageDialog.Commands.Add(new UICommand("Cancel"));
+            messageDialog.DefaultCommandIndex = 0;
+            messageDialog.CancelCommandIndex = 2;
+
+            await messageDialog.ShowAsync();
+        }
+
+        /// <summary>
+        /// Picks the file to save the quiz to.
+        /// </summary>
+        private async void PickQuizSaveFile()
         {
             var fileSavePicker = new FileSavePicker
             {
@@ -75,7 +99,7 @@ namespace Cramit.ViewModels
                 DefaultFileExtension = ".cramit",
                 SuggestedStartLocation = PickerLocationId.DocumentsLibrary
             };
-            fileSavePicker.FileTypeChoices.Add("Cramit Quiz File", new[] { ".cramit" }.ToList());
+            fileSavePicker.FileTypeChoices.Add("Cramit Quiz", new[] { ".cramit" }.ToList());
             quizFile = await fileSavePicker.PickSaveFileAsync();
             if (quizFile == null)
             {
@@ -83,7 +107,7 @@ namespace Cramit.ViewModels
             }
             else
             {
-                Title = quizFile.DisplayName;
+                quizViewModel.Title = quizFile.DisplayName;
             }
         }
     }

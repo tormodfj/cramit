@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 
 namespace Cramit.Data
 {
@@ -6,13 +6,13 @@ namespace Cramit.Data
     {
         public Quiz()
         {
-            Items = new ObservableCollection<QuizEntity>();
+            Entities = new List<QuizEntity>();
         }
 
         public string Title { get; set; }
 
         public string Description { get; set; }
 
-        public ObservableCollection<QuizEntity> Items { get; private set; }
+        public List<QuizEntity> Entities { get; private set; }
     }
 }

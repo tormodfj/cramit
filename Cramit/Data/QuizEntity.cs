@@ -1,22 +1,9 @@
-﻿using Cramit.Common;
-
-namespace Cramit.Data
+﻿namespace Cramit.Data
 {
-    public class QuizEntity : BindableBase
+    public class QuizEntity
     {
-        private string question = string.Empty;
-        private string answer = string.Empty;
+        public string Question { get; set; }
 
-        public string Question
-        {
-            get { return question; }
-            set { SetProperty(ref question, value); }
-        }
-
-        public string Answer
-        {
-            get { return answer; }
-            set { SetProperty(ref answer, value); }
-        }
+        public string Answer { get; set; }
     }
 }

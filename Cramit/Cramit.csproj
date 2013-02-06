@@ -104,11 +104,13 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Data\LocalQuizCollection.cs" />
+    <Compile Include="Data\JsonExtensions.cs" />
+    <Compile Include="Data\StorageFileExtensions.cs" />
     <Compile Include="ViewModels\MainPageMenuItemViewModel.cs" />
     <Compile Include="Data\Quiz.cs" />
     <Compile Include="Data\QuizEntity.cs" />
     <Compile Include="ViewModels\DefineQuizViewModel.cs" />
+    <Compile Include="ViewModels\EditQuizViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\BindableBase.cs" />
@@ -118,6 +120,9 @@
     <Compile Include="Common\RichTextColumns.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
+    <Compile Include="Views\EditQuizView.xaml.cs">
+      <DependentUpon>EditQuizView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -155,6 +160,10 @@
     <Page Include="Common\StandardStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\EditQuizView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainPageView.xaml">
       <SubType>Designer</SubType>
